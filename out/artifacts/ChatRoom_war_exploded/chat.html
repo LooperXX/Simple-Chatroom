@@ -1,0 +1,606 @@
+<!--Created by IntelliJ IDEA.
+User: HP
+Date: 2018/1/20
+Time: 11:07
+To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Chat room</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/metisMenu.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet prefetch'
+          href='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.min.css'>
+    <link rel="stylesheet" href="css/service.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/examples.css">
+    <script type="application/javascript">
+        function showStar() {
+            $('#star').show();
+        }
+
+        function onkey() {
+            if (window.event.keyCode === 13) {
+                sendMsg();
+            }
+        }
+
+        function clickonBot() {
+            sendMsgToNewBot();
+            insertMessage();
+        }
+
+        function toAll() {
+            changeTo("Group_chat");
+        }
+
+        function showEmoji() {
+            var display = $('#showEmoji').css("display");
+            if (display == "none") {
+                $('#showEmoji').show();
+                var modal1 = document.getElementById('showEmoji');
+                var modal2 = document.getElementById('bubble2');
+                window.onclick = function(event) {
+                    if (event.target != modal1 && event.target != modal2) {
+                        $('#showEmoji').hide();
+                    }
+                }
+            } else if (display == "block") {
+                $('#showEmoji').hide();
+            }
+        }
+
+        function sendEmoji(address) {
+            address = address.replace("http://localhost:8080/", "");/*提取emoji的src*/
+            sendYourEmoji(address);
+        }
+    </script>
+</head>
+<body background="">
+<div class="bubble" id="bubble2" onclick="showEmoji();"
+     style="z-index: 12;background-image: url(emoji/1.png);width: 50px;height: 50px;top: 30%;"></div>
+<div id="showEmoji" style="display: none;z-index: 13;position: absolute;margin-left:15%;margin-top: 2%">
+    <table class="table table-bordered" style="height:448.8px;width: 404px;background: #f1f1f1;">
+        <tbody>
+        <tr style="width: 280px;height: 28px">
+            <td><img src="emoji/1.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/2.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/3.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/4.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/5.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/6.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/7.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/8.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/9.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/10.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+        </tr>
+        <tr style="width: 280px;height: 28px">
+            <td><img src="emoji/11.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/12.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/13.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/14.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/15.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/16.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/17.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/18.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/19.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/20.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+        </tr>
+        <tr style="width: 280px;height: 28px">
+            <td><img src="emoji/21.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/22.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/23.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/24.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/25.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/26.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/27.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/28.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/29.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/30.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+        </tr>
+        <tr style="width: 280px;height: 28px">
+            <td><img src="emoji/31.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/32.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/33.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/34.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/35.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/36.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/37.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/38.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/39.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/40.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+        </tr>
+        <tr style="width: 280px;height: 28px">
+            <td><img src="emoji/41.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/42.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/43.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/44.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/45.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/46.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/47.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/48.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/49.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/50.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+        </tr>
+        <tr style="width: 280px;height: 28px">
+            <td><img src="emoji/51.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/52.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/53.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/54.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/55.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/56.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/57.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/58.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/59.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/60.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+        </tr>
+        <tr style="width: 280px;height: 28px">
+            <td><img src="emoji/61.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/62.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/63.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/64.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/65.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/66.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/67.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/68.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/69.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/70.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+        </tr>
+        <tr style="width: 280px;height: 28px">
+            <td><img src="emoji/71.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/72.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/73.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/74.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/75.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/76.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/77.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/78.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/79.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/80.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+        </tr>
+        <tr style="width: 280px;height: 28px">
+            <td><img src="emoji/81.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/82.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/83.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+            <td><img src="emoji/84.png" width="28" height="28" onclick="sendEmoji(src);"/></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <div class="bubble" id="bubble1" onclick="show();" style="z-index: 11"></div>
+    <div id="star" style="display:none;position: absolute;left: 45%;">
+        <div class="box box-green">
+            <select id="example-e" name="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+            <p id="record"></p>
+        </div>
+    </div>
+    <div id="show" style="display: none;">
+        <div class="chat"
+             style="background: linear-gradient(135deg, #044f48, #345093);background-size: cover;background: #fff;font-family: 'Avenir', 'Open Sans', sans-serif;line-height: 1.3;overflow: hidden;">
+            <div class="avenue-messenger">
+                <div class="menu">
+                    <div class="items"><span>
+                <a href="#" onclick="minimize()" title="Minimize">&mdash;</a><br>
+                <a href="#" onclick="showStar()" title="End Chat">&#10005;</a>
+                </span></div>
+                    <div class="button" onclick="buttonshow()">...</div>
+                </div>
+                <div class="agent-face">
+                    <div class="half">
+                        <img class="agent circle" src="Head_portrait.png"></div>
+                </div>
+                <div class="chat">
+                    <div class="chat-title">
+                        <h1>Violet Evergarden</h1>
+                        <h2>薇尔莉特</h2>
+                    </div>
+                    <div class="messages">
+                        <div class="messages-content"></div>
+                    </div>
+                    <div class="message-box">
+                        <textarea id="newBot" class="message-input" placeholder="Type message..."></textarea>
+                        <button type="submit" class="message-submit" onclick="clickonBot()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="box" style="margin-left:9%;margin-right:auto;margin-top: 10%;overflow: hidden">
+        <div class="col-lg-6">
+            <div class="chat-panel panel panel-default">
+                <div class="panel-heading lead" style="text-align:center" id="title">
+                    <i class="fa fa-comments fa-fw"></i>Group_chat
+                </div>
+                <div class="panel-body" id="chatBody">
+                    <ul class="" id="chatContent">
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input onkeydown="onkey()" id="btn-input" type="text" class="form-control input-sm"
+                               placeholder="Type your message here...">
+                        <span class="input-group-btn">
+                                    <button class="btn btn-warning btn-sm" id="btn-chat" onclick="sendMsg()">
+                                        Send
+                                    </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="user_Group_chat" onclick="toAll()" style="background:transparent;">
+                    <i class="fa  fa-user fa-fw"></i>Group_chat
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-group fa-fw"></i> User_List
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group" id="userList">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+</div>
+</body>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js'></script>
+<script src="js/jquery.barrating.js"></script><!--打分用-->
+<script src="js/examples.js"></script><!--打分用-->
+<script src="js/service.js"></script>
+<script type="application/javascript">
+    "use strict";
+
+    var to = "Group_chat";/*记录to谁*/
+    var from = "";
+    var Chat = {};
+    var Console = {};
+    var userList = {};
+    var msgRecord = {};/*保存消息记录*/
+    var localNickName = window.location.search.split("=")[1];/*当前线程的用户名*/
+    var ptpMap = new Map();/*（聊天对象，消息条数）*/
+    var ptpCharacter = "Group_chat";/*当前聊天界面对象*/
+    var newBot = false ;
+
+    Chat.initialize = function () {
+        if (window.location.protocol == 'http:') {
+            Chat.connect('ws://' + window.location.host + '/chat/' + window.location.search.split("=")[1]);
+
+        } else {
+            Chat.connect('wss://' + window.location.host + '/chat');
+        }
+    };
+
+    Chat.socket = null;
+    Chat.connect = (function (host) { /*建立连接*/
+        if ('WebSocket' in window) {
+            Chat.socket = new WebSocket(host);
+        } else if ('MozWebSocket' in window) {
+            Chat.socket = new MozWebSocket(host);
+        } else {
+            alert('Error: WebSocket is not supported by this browser.');
+            return;
+        }
+
+        Chat.socket.onclose = function () {
+//            document.getElementById('chat').onkeydown = null;
+//            Console.log('Info: WebSocket closed.');
+        };
+
+        var disappear = function () {
+            var divs = document.getElementById("myAlert");
+            divs.parentNode.removeChild(divs);
+        }
+
+        function remind(obj) { /*上线下线提醒*/
+            var divs = document.createElement("div");
+            if (obj["user"] == localNickName) {
+                return;
+            }
+            divs.id = "myAlert";
+            divs.className = "alert alert-success";
+            divs.style = "position:fixed;up:0px";
+            if (obj["type"] == "online") {
+                divs.innerHTML += ( obj["user"] + " is online!");
+                console.log("online " + obj["user"]);
+
+            } else {
+                divs.innerHTML += ( obj["user"] + " is offline!");
+                console.log("offline " + obj["user"]);
+            }
+            var first = document.body.firstChild;
+            if (first.id == "myAlert") {
+                document.body.insertBefore(divs, first.nextSibling);
+            }
+            else {
+                document.body.insertBefore(divs, first);
+            }
+            setTimeout(disappear, 3000);
+        }
+
+        Chat.socket.onmessage = function (message) {/*分析消息*/
+            console.log("msg" + message.data);
+            var obj = JSON.parse(message.data);
+            var type = obj.type;
+            switch (type) {
+                case "userList":/*更新用户列表*/
+                    userList.updateList(obj);
+                    break;
+                case "msg":/*更新消息*/
+                    updateMsg(obj);
+                    break;
+                case "online":/*更新上线消息*/
+                    remind(obj);
+                    break;
+                case "offline":/*更新下线消息*/
+                    remind(obj);
+                    break;
+                default:
+            }
+        };
+    });
+
+    userList.updateList = (function (obj) {
+        var userList = document.getElementById("userList");
+        userList.innerHTML = "";
+        for (var user in obj['userList']) {
+            if (obj['userList'].hasOwnProperty(user) && obj['userList'][user] != localNickName) {
+                var a = document.createElement("a");
+                a.className = "list-group-item";
+                a.id = "user_" + obj['userList'][user];
+                a.setAttribute("onclick", "changeTo(\"" + obj['userList'][user] + "\")");
+                var i = document.createElement("i");
+                i.className = "fa fa-user fa-fw";
+                a.appendChild(i);
+                a.innerHTML += obj['userList'][user];
+                userList.appendChild(a);
+            }
+            if (obj['userList'][user] != localNickName) {
+                initialize(obj['userList'][user]);
+            }
+        }
+    });
+
+    function updateMsg(obj) {
+        if (obj["broadcast"]) {/*广播*/
+            if (!("Group_chat" in msgRecord)) {
+                msgRecord["Group_chat"] = [];
+            }
+            msgRecord["Group_chat"].push(obj);
+            if (to == "Group_chat") {
+                loadMsg(to);
+            } else {
+                notice("Group_chat");
+            }
+        }
+        else {
+            if(obj["from"] == "Chat_bot" && newBot){
+                showMsgFromNewBot(obj["content"]);
+                newBot = false;
+                return;
+            }
+            if (!(obj["from"] in msgRecord)) {
+                msgRecord[obj["from"]] = [];
+            }
+            msgRecord[obj["from"]].push(obj);
+            from = obj["from"];
+            if (from != ptpCharacter) {
+                ptpMap.set(from, ptpMap.get(from) + 1);
+            }
+            if (to == from) {
+                loadMsg(to);
+            } else {
+                newMessage(from);
+            }
+        }
+    }
+
+    Chat.sendMessage = (function (message) {
+        if (message != '') {
+            Chat.socket.send(message);
+        }
+    });
+
+    function initialize(who) {/*初始化map*/
+        ptpMap.set(who, 0);
+    }
+
+    function newMessage(who) {/*提示消息并显示条数*/
+        var a = document.getElementById("user_" + who);
+        a.innerHTML = "";
+        a.style.background = "#AAFFAA";
+        var i = document.createElement("i");
+        i.className = "fa fa-user fa-fw";
+        a.appendChild(i);
+        a.innerHTML += who;
+        a.innerHTML += ("&nbsp;&nbsp;" + "<span class=\"badge\">" + ptpMap.get(who) + "</span>");
+    }
+
+    function notice(who) {
+        var a = document.getElementById("user_" + who);
+        a.innerHTML = "";
+        a.style.background = "#AAFFAA";
+        var i = document.createElement("i");
+        i.className = "fa fa-user fa-fw";
+        a.appendChild(i);
+        a.innerHTML += who;
+        a.innerHTML += ("&nbsp;&nbsp;" + "\<i class='fa fa-envelope-o'\>\</i\>" + "&nbsp; new message!");
+    }
+
+    function unNotion(who) {
+        var a = document.getElementById("user_" + who);
+        a.innerHTML = "";
+        a.style.background = "transparent";
+        var i = document.createElement("i");
+        i.className = "fa fa-user fa-fw";
+        a.appendChild(i);
+        a.innerHTML += who;
+    }
+
+    function loadMsg(to) {
+        var content = document.getElementById("chatContent");
+        content.innerHTML = "";
+        for (var msgss in msgRecord[to]) {
+            if (msgRecord[to].hasOwnProperty(msgss)) {
+                var li = document.createElement("li");
+                console.log("msgRecord[to][msgss][from]:" + msgRecord[to][msgss]["from"]);
+                console.log("localNickName" + localNickName);
+                li.className = "left clearfix ";
+                li.style.listStyleType = "none";
+                var div = document.createElement("div");
+                div.className = "header";
+                var strong = document.createElement("strong");
+                strong.className = "lead";
+                strong.innerHTML = msgRecord[to][msgss]["from"];
+                strong.innerHTML += "   ";
+                var small = document.createElement("small");
+                small.style = "white-space:nowrap";
+                var i = document.createElement("i");
+                i.className = "fa fa-clock-o fa-fw";
+                i.innerHTML = msgRecord[to][msgss]["time"];
+                small.appendChild(i);
+                div.appendChild(strong);
+                div.appendChild(small);
+                li.appendChild(div);
+                var p = document.createElement("p");
+                p.className = "well";
+                var newMsg = msgRecord[to][msgss]["content"];
+                if (newMsg.startsWith("emoji")) {
+                    p.innerHTML = "<img src=\"" + newMsg + "\" width=\"28\" height=\"28\"/>";/*判断为图片*/
+                } else {
+                    p.innerHTML = newMsg;/*判断为信息*/
+                }
+                li.appendChild(p);
+                li.appendChild(document.createElement("br"));
+                content.appendChild(li);
+                var chatbody = document.getElementById("chatBody");
+                chatbody.scrollTop = chatbody.scrollHeight;
+            }
+        }
+    }
+
+    function sendMsg() {
+        var msgContent = document.getElementById("btn-input").value;
+        document.getElementById("btn-input").value = "";
+        if (msgContent == "") {
+            return;
+        }
+        if (to == "Group_chat") {
+            sendToAll(msgContent)
+        }
+        else {
+            sendToOne(msgContent);
+        }
+    }
+
+    function sendMsgToNewBot() {
+        var content = $('.message-input').val();
+        if (content == "") {
+            return;
+        }
+        sendToNewBot(content);
+    }
+
+    function sendYourEmoji(address) {
+        if (to == "Group_chat") {
+            sendToAll(address)
+        }
+        else {
+            sendToOne(address);
+        }
+    }
+
+    function sendToOne(msgContent) { /*点对点私聊*/
+        var obj = {
+            "type": "msg",
+            "time": getTime(),
+            "content": msgContent,
+            "from": localNickName,
+            "to": to,
+            "broadcast": false
+        };
+        if (!(to in msgRecord)) {
+            msgRecord[to] = [];
+        }
+        msgRecord[to].push(obj);
+        loadMsg(to);
+        Chat.socket.send(JSON.stringify(obj));
+    }
+
+    function sendToNewBot(content) {
+        var obj = {
+            "type": "msg",
+            "time": getTime(),
+            "content": content,
+            "from": localNickName,
+            "to": "Chat_bot",
+            "broadcast": false
+        };
+        newBot = true;
+        Chat.socket.send(JSON.stringify(obj));
+    }
+
+    function sendToAll(msgContent) {
+        var bcmsg = {/*广播信息*/
+            "type": "msg",
+            "time": getTime(),
+            "content": msgContent,
+            "from": localNickName,
+            "to": "Group_chat",
+            "broadcast": true
+        };
+        Chat.sendMessage(JSON.stringify(bcmsg));/*传输字符串*/
+    }
+
+    function changeTo(toWho) {
+        var title = document.getElementById("title");
+        to = toWho;
+        ptpCharacter = to;
+        title.innerHTML = "<i class=\"fa fa-comments fa-fw\"></i>" + to;
+        unNotion(to);
+        if (to != "Group_Chat") {
+            ptpMap.set(to, 0);
+        }
+        loadMsg(to);/*载入聊天记录*/
+    }
+
+    function getTime() {
+        var myDate = new Date();
+        return myDate.toLocaleTimeString();
+    }
+
+    Chat.initialize();
+    document.addEventListener("DOMContentLoaded", function () {
+        var noscripts = document.getElementsByClassName("noscript");
+        for (var i = 0; i < noscripts.length; i++) {
+            noscripts[i].parentNode.removeChild(noscripts[i]);
+        }
+    }, false);
+
+</script>
+</html>
